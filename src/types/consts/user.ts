@@ -1,0 +1,1 @@
+export const BASE_USER_PATH = '/api/users';

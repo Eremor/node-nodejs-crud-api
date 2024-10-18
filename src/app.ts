@@ -1,5 +1,6 @@
 import { createServer } from 'http';
+import { router } from './routes';
 
 export const app = createServer((req, res) => {
-  console.log('router to endpoints')
+  router(req, res)
 })

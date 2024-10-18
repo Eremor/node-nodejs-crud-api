@@ -1,6 +1,7 @@
 import { v4 } from 'uuid';
-import { userDB } from '@db';
-import { User } from '@types';
+
+import { User } from '../../types';
+import { userDB } from '../../db';
 
 export class UserModule {
   private users: User[] = userDB;

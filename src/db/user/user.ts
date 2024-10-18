@@ -1,6 +1,6 @@
 import { v4 } from 'uuid';
 
-import { User } from '@types';
+import { User } from '../../types';
 
 export const userDB: User[] = [
   {
