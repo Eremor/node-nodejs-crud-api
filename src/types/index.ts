@@ -1,5 +1,7 @@
 export {
-  User
+  User,
+  CreateUserDTO,
+  UpdateUserDTO
 } from './user/user';
 
 export {

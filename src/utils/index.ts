@@ -1,7 +1,15 @@
-import { IncomingMessage, ServerResponse } from "http";
-import { User } from "../types";
+import {
+  IncomingMessage,
+  ServerResponse
+} from "http";
 
-export const parseRequestBody = (req: IncomingMessage): Promise<unknown> => {
+import {
+  CreateUserDTO,
+  UpdateUserDTO,
+  User
+} from "../types";
+
+export const parseRequestBody = (req: IncomingMessage): Promise<CreateUserDTO | UpdateUserDTO> => {
   return new Promise((res, rej) => {
     let body = '';
     req.on('data', (chunk: Buffer | string) => {

@@ -4,3 +4,6 @@ export interface User {
   age: number;
   hobbies: string[] | []
 }
+
+export type CreateUserDTO = Omit<User, 'id'>;
+export type UpdateUserDTO = Partial<CreateUserDTO>;

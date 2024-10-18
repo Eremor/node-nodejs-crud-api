@@ -1,6 +1,10 @@
 import { v4 } from 'uuid';
 
-import { User } from '../../types';
+import {
+  CreateUserDTO,
+  UpdateUserDTO,
+  User
+} from '../../types';
 import { userDB } from '../../db';
 
 export class UserModule {
@@ -14,7 +18,7 @@ export class UserModule {
     return this.users.find((user) => user.id === id);
   }
 
-  public create(createDTO: Omit<User, 'id'>): User {
+  public create(createDTO: CreateUserDTO): User {
     const newUser: User = {
       id: v4(),
       ...createDTO
@@ -23,7 +27,7 @@ export class UserModule {
     return newUser;
   }
 
-  public update(id: string, updateDTO: Partial<User>): User | undefined {
+  public update(id: string, updateDTO: UpdateUserDTO): User | undefined {
     const index: number = this.users.findIndex((user) => user.id === id);
     if (index === -1) {
       return undefined;

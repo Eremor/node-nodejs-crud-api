@@ -1,4 +1,5 @@
 export {
   getAllUsers,
-  getUserById
+  getUserById,
+  createUser
 } from './user/user';

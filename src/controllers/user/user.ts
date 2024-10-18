@@ -2,7 +2,12 @@ import { IncomingMessage, ServerResponse } from 'http';
 import { validate } from 'uuid';
 
 import { UserModule } from '../../models';
-import { send200, send400, send404 } from '../../utils';
+import {
+  parseRequestBody,
+  send200,
+  send400,
+  send404
+} from '../../utils';
 
 const userModel = new UserModule();
 
@@ -11,7 +16,7 @@ export const getAllUsers = (res: ServerResponse): void => {
   send200(res, users);
 }
 
-export const getUserById = (req: IncomingMessage, res: ServerResponse, userId: string): void => {
+export const getUserById = (res: ServerResponse, userId: string): void => {
   if (!validate(userId)) {
     return send400(res, 'Invalid userId format');
   }
@@ -23,4 +28,26 @@ export const getUserById = (req: IncomingMessage, res: ServerResponse, userId: s
   }
 
   send200(res, user);
+}
+
+export const createUser = async (req: IncomingMessage, res: ServerResponse) => {
+  try {
+    const { username, age, hobbies } = await parseRequestBody(req);
+
+    if (!username || typeof username !== 'string' || !age || typeof age !== 'number' || !hobbies || !Array.isArray(hobbies)) {
+      return send400(res, 'Invalid request body. Required username as string, age as number and hobbies as array')
+    }
+
+    const newUser = userModel.create({ username, age, hobbies });
+    res.writeHead(
+      201,
+      {
+        'Content-Type': 'application/json'
+      }
+    );
+    res.end(JSON.stringify(newUser))
+  } catch (error) {
+    send400(res, 'Invalid request body')
+    console.error(error)
+  }
 }
