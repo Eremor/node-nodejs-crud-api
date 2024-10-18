@@ -1,15 +1,10 @@
 import { IncomingMessage, ServerResponse } from 'http';
 import { UserModule } from '../../models';
+import { send200 } from '../../utils';
 
 const userModel = new UserModule();
 
-export const getAllUsers = (req: IncomingMessage, res: ServerResponse): void => {
+export const getAllUsers = (res: ServerResponse): void => {
   const users = userModel.getAll();
-  res.writeHead(
-    200,
-    {
-      'Content-Type': 'application/json'
-    }
-  )
-  res.end(JSON.stringify(users))
+  send200(res, users);
 }
