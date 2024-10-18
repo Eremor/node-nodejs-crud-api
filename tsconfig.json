@@ -7,7 +7,46 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "./dist",
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "baseUrl": "./",
+    "paths": {
+      "@controllers": [
+        "src/controllers"
+      ],
+      "@controllers/*": [
+        "src/controllers/*"
+      ],
+      "@db": [
+        "src/db"
+      ],
+      "@db/*": [
+        "src/db/*"
+      ],
+      "@models": [
+        "src/models"
+      ],
+      "@models/*": [
+        "src/models/*"
+      ],
+      "@routes": [
+        "src/routes"
+      ],
+      "@routes/*": [
+        "src/routes/*"
+      ],
+      "@types": [
+        "src/types"
+      ],
+      "@types/*": [
+        "src/types/*"
+      ],
+      "@utils": [
+        "src/utils"
+      ],
+      "@utils/*": [
+        "src/utils/*"
+      ],
+    }
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]
