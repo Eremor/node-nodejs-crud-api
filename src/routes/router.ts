@@ -2,6 +2,7 @@ import { IncomingMessage, ServerResponse } from 'http';
 
 import {
   createUser,
+  deleteUser,
   getAllUsers,
   getUserById,
   updateUser
@@ -33,6 +34,9 @@ export const router = (req: IncomingMessage, res: ServerResponse): void => {
         break;
       case 'PUT':
         updateUser(req, res, userId)
+        break;
+      case 'DELETE':
+        deleteUser(res, userId)
         break;
     
       default:

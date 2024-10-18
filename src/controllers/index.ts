@@ -2,5 +2,6 @@ export {
   getAllUsers,
   getUserById,
   createUser,
-  updateUser
+  updateUser,
+  deleteUser
 } from './user/user';

@@ -76,3 +76,18 @@ export const updateUser = async (req: IncomingMessage, res: ServerResponse, user
     console.error(error)
   }
 }
+
+export const deleteUser = (res: ServerResponse, userId: string): void => {
+  if (!validate(userId)) {
+    return send400(res, 'Invalid userId format');
+  }
+
+  const deleted = userModel.delete(userId);
+
+  if (!deleted) {
+    return send404(res, 'User not found')
+  }
+
+  res.writeHead(204)
+  res.end()
+}
