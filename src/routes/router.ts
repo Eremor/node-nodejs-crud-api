@@ -3,7 +3,8 @@ import { IncomingMessage, ServerResponse } from 'http';
 import {
   createUser,
   getAllUsers,
-  getUserById
+  getUserById,
+  updateUser
 } from '../controllers';
 import { BASE_USER_PATH } from '../types';
 import { send404 } from '../utils';
@@ -29,6 +30,9 @@ export const router = (req: IncomingMessage, res: ServerResponse): void => {
     switch (method) {
       case 'GET':
         getUserById(res, userId)
+        break;
+      case 'PUT':
+        updateUser(req, res, userId)
         break;
     
       default:

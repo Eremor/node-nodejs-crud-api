@@ -30,7 +30,7 @@ export const getUserById = (res: ServerResponse, userId: string): void => {
   send200(res, user);
 }
 
-export const createUser = async (req: IncomingMessage, res: ServerResponse) => {
+export const createUser = async (req: IncomingMessage, res: ServerResponse): Promise<void> => {
   try {
     const { username, age, hobbies } = await parseRequestBody(req);
 
@@ -46,6 +46,31 @@ export const createUser = async (req: IncomingMessage, res: ServerResponse) => {
       }
     );
     res.end(JSON.stringify(newUser))
+  } catch (error) {
+    send400(res, 'Invalid request body')
+    console.error(error)
+  }
+}
+
+export const updateUser = async (req: IncomingMessage, res: ServerResponse, userId: string): Promise<void> => {
+  if (!validate(userId)) {
+    return send400(res, 'Invalid userId format');
+  }
+
+  try {
+    const { username, age, hobbies } = await parseRequestBody(req);
+
+    if ((!!username && typeof username !== 'string') || (!!age && typeof age !== 'number') || (!!hobbies && !Array.isArray(hobbies))) {
+      return send400(res, 'Invalid request body')
+    }
+
+    const updatedUser = userModel.update(userId, { username, age, hobbies });
+
+    if (!updatedUser) {
+      return send404(res, 'User not found')
+    }
+
+    send200(res, updatedUser)
   } catch (error) {
     send400(res, 'Invalid request body')
     console.error(error)

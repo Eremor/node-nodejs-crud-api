@@ -23,6 +23,11 @@ export class UserModule {
       id: v4(),
       ...createDTO
     };
+
+    if (newUser.hobbies.some((el) => typeof el !== 'string')) {
+      throw new Error();
+    }
+
     this.users.push(newUser);
     return newUser;
   }
@@ -32,10 +37,18 @@ export class UserModule {
     if (index === -1) {
       return undefined;
     };
+
     this.users[index] = {
       ...this.users[index],
-      ...updateDTO
+      username: !!updateDTO.username ? updateDTO.username : this.users[index].username,
+      age: !!updateDTO.age ? updateDTO.age : this.users[index].age,
+      hobbies: !!updateDTO.hobbies ? updateDTO.hobbies : this.users[index].hobbies,
     };
+
+    if (this.users[index].hobbies.some((el) => typeof el !== 'string')) {
+      throw new Error();
+    }
+
     return this.users[index];
   }
 
