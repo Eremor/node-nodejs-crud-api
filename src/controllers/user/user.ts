@@ -45,6 +45,8 @@ export const createUser = async (req: IncomingMessage, res: ServerResponse): Pro
       }
     );
     res.end(JSON.stringify(newUser))
+
+    process.send?.({ users: userModel.getAll() })
   } catch (error) {
     send400(res, 'Invalid request body')
     console.error(error)
@@ -70,6 +72,8 @@ export const updateUser = async (req: IncomingMessage, res: ServerResponse, user
     }
 
     send200(res, updatedUser)
+
+    process.send?.({ users: userModel.getAll() })
   } catch (error) {
     send400(res, 'Invalid request body')
     console.error(error)
@@ -89,4 +93,6 @@ export const deleteUser = (res: ServerResponse, userId: string): void => {
 
   res.writeHead(204)
   res.end()
+
+  process.send?.({ users: userModel.getAll() })
 }

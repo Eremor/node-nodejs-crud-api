@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start:dev": "ts-node-dev src/server.ts",
-    "start:prod": "tsc && node dist/server.js"
+    "start:prod": "tsc && node dist/server.js",
+    "start:multi": "tsc && node dist/cluster.js"
   },
   "keywords": [],
   "author": "",

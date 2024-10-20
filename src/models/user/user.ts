@@ -10,6 +10,12 @@ import { userDB } from '../../db';
 export class UserModule {
   private users: User[] = userDB;
 
+  constructor() {
+    process.on('message', (msg: { users: User[] }) => {
+      this.users = msg.users;
+    })
+  }
+
   public getAll(): User[] {
     return this.users;
   }
