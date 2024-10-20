@@ -8,6 +8,12 @@ Implementing a simple CRUD API using an in-memory database
 
 ## Install
 Clone the project to yourself
+
+Go to develop branch
+```bash
+git checkout develop
+```
+
 Install the packages with command:
 ```bash
 npm install
