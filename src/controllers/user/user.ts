@@ -20,7 +20,6 @@ export const getUserById = (res: ServerResponse, userId: string): void => {
   if (!validate(userId)) {
     return send400(res, 'Invalid userId format');
   }
-
   const user = userModel.getById(userId);
 
   if (!user) {
